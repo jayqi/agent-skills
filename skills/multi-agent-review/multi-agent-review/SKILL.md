@@ -28,6 +28,6 @@ After reviews are in, you (the dispatcher) should collate, verify, and triage th
 - Report the findings as text.
 - List the findings in order of severity.
 - For each finding:
-    - Give a clear and concise summary of the finding and which reviewers reported it.
+    - Give a clear and concise description of the finding and which reviewers reported it. The goal of this description should be for the user to have sufficient information to understand the finding and make a determination on what to do. It should stand alone—users should not be expected to go review the raw reports from the reviewer subagents. It should not contain extranneous information not relevant to understanding the finding, e.g., it should not contain a blow-by-blow of how the reviewer discovered it. 
     - Give a recommendation of "fix", "defer", or "dismiss".
     - For findings with a recommended fix, present the fix clearly. Show a diff of the proposed fix if appropriate and helpful for understanding.
