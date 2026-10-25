@@ -32,14 +32,14 @@ This review is about cleanup. Missing coverage is out of scope; leave it to code
 
 - **Speculative tests**: inputs the code never receives, hypothetical future edits, or exhaustive coverage of structurally symmetric cases.
 - **Tautological tests**: asserting declared constants, fixture or template contents; re-implementing the code under test; asserting behavior the framework, a dependency, or the type checker already guarantees.
-- **Tests of edit history**: asserting that removed or replaced behavior is gone, or "regression" tests for changes that never shipped. A regression test for a shipped bug is fine.
+- **Tests of edit history**: asserting that removed or replaced behavior is gone, or tests that guard against changes that never shipped.
 - **Redundant tests**: the same behavior covered in multiple modules or layers; near-duplicates that should be merged or parametrized; tests that only exercise dead code.
 - **Wrong level**: unit tests of internals where a test through the public entry point would cover it; mocks or fake harnesses complex enough to need their own trust.
 - **Tests that can't fail**: data or controls that don't distinguish the correct result from a plausible wrong one; a shared fixture bent into an edge case; nondeterminism.
 - **Tests that lock in questionable design**: report the design problem instead of encoding it.
 - **Brittle assertions**: parsing markup with regex instead of structure; coupling to incidental implementation details.
 - **Isolation**: dependence on real external resources; leaked global state patched test by test instead of fixed generally.
-- **Organization**: tests in the wrong or a needlessly new module; misleading names; explanations far from the test they explain.
+- **Organization**: tests in the wrong or a needlessly new module; tests grouped or named by why they were written (a regression, an issue number) instead of the behavior they cover; misleading names; explanations far from the test they explain.
 
 ## Workflow
 
