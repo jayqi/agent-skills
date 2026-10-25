@@ -5,7 +5,7 @@ description: Use when a user asks to review, clean up, or audit a test suite, or
 
 # Test Suite Review
 
-This skill covers how to review an existing test suite for quality and propose cleanups, primarily removing or consolidating tests that add little value.
+This skill covers how to review an existing test suite for quality and report recommended cleanups, primarily removing or consolidating tests that add little value. The review is read-only: don't modify any files.
 
 ## Focus
 
@@ -37,21 +37,17 @@ This review is about cleanup. Missing coverage is out of scope; leave it to code
 - **Wrong level**: unit tests of internals where a test through the public entry point would cover it; mocks or fake harnesses complex enough to need their own trust.
 - **Tests that can't fail**: data or controls that don't distinguish the correct result from a plausible wrong one; a shared fixture bent into an edge case; nondeterminism.
 - **Tests that lock in questionable design**: report the design problem instead of encoding it.
-- **Brittle assertions**: parsing markup with regex instead of structure; coupling to incidental implementation details.
+- **Brittle assertions**: assertions that break on changes that don't affect behavior, like formatting, ordering, or incidental implementation details. Asserting exact output is fine when that output is the product.
 - **Isolation**: dependence on real external resources; leaked global state patched test by test instead of fixed generally.
 - **Organization**: tests in the wrong or a needlessly new module; tests grouped or named by why they were written (a regression, an issue number) instead of the behavior they cover; misleading names; explanations far from the test they explain.
 
-## Workflow
-
-<!-- TODO: steps, e.g., discover the project's test runner, survey the suite, classify findings, propose changes. -->
-
-When proposing changes:
-
-- Don't fix a failing test by changing its expected value to match buggy output.
-- Before recommending a deletion, confirm that nothing you want is lost.
-- Keep changes to existing tests in proportion to what the branch needs.
-- Leave reasonable choices alone: a coverage pragma on a truly unreachable branch, or snapshot tests when the string output is the product.
-
 ## Output format
 
-<!-- TODO -->
+- Report the findings as text, most valuable cleanup first.
+- For each finding:
+    - Identify the tests involved and which item from "What to look for" applies.
+    - Explain the problem clearly and concisely, so that the user can decide without reading the tests first.
+    - Recommend an action: remove, merge, rewrite, or move/rename. Show the proposed change concretely, with a diff when helpful.
+    - Say how you verified it. For a removal or merge, show that nothing worth keeping is lost: where else the behavior is covered, or why it isn't worth covering. For a test that can't fail, name a plausible wrong implementation that would pass it.
+- List any out-of-focus findings at the end, as described under Focus.
+- If nothing in focus needs cleanup, say so.
