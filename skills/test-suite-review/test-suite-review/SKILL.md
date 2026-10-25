@@ -35,7 +35,7 @@ This review is about cleanup. Missing coverage is out of scope; leave it to code
 - **Tests of edit history**: asserting that removed or replaced behavior is gone, or tests that guard against changes that never shipped.
 - **Redundant tests**: the same behavior covered in multiple modules or layers; near-duplicates that should be merged or parametrized; tests that only exercise dead code.
 - **Wrong level**: unit tests of internals where a test through the public entry point would cover it; mocks or fake harnesses complex enough to need their own trust.
-- **Tests that can't fail**: data or controls that don't distinguish the correct result from a plausible wrong one; a shared fixture bent into an edge case; nondeterminism.
+- **Tests that can't fail**: data or controls that don't distinguish the correct result from a plausible wrong one.
 - **Tests that lock in questionable design**: report the design problem instead of encoding it.
 - **Brittle assertions**: assertions that break on changes that don't affect behavior, like formatting, ordering, or incidental implementation details. Asserting exact output is fine when that output is the product.
 - **Isolation**: dependence on real external resources; leaked global state patched test by test instead of fixed generally.
