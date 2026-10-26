@@ -24,7 +24,7 @@ This review is about cleanup. Missing coverage is out of scope; leave it to code
 - **Speculative tests**: inputs the code never receives, hypothetical future edits, or exhaustive coverage of structurally symmetric cases.
 - **Tautological tests**: restating declared data or the code under test; asserting what the framework, a dependency, or the type checker already guarantees.
 - **Tests of edit history**: asserting that removed or replaced behavior is gone, or tests that guard against changes that never shipped.
-- **Redundant tests**: the same behavior covered in multiple modules or layers; near-duplicates that should be merged or parametrized; tests that only exercise dead code.
+- **Redundant tests**: the same behavior tested twice at the same layer, or re-checked case by case at a higher one; near-duplicates that should be merged or parametrized; tests that only exercise dead code. An end-to-end test of the full output isn't redundant.
 - **Wrong level**: unit tests of internals where a test through the public entry point would cover it; mocks or fake harnesses complex enough to need their own trust.
 - **Tests that can't fail**: data or controls that don't distinguish the correct result from a plausible wrong one.
 - **Over-specified tests**: asserting behavior that isn't a requirement, which makes an incidental or questionable decision hard to change.
@@ -39,5 +39,5 @@ This review is about cleanup. Missing coverage is out of scope; leave it to code
     - Identify the tests involved and which item from "What to look for" applies.
     - Explain the problem clearly and concisely, so that the user can decide without reading the tests first.
     - Recommend an action and show the proposed change concretely, with a diff when helpful.
-    - Say how you verified it. For a removal or merge, show that nothing worth keeping is lost: where else the behavior is covered, or why it isn't worth covering. For a test that can't fail, name a plausible wrong implementation that would pass it.
+    - Say how you verified it. For a removal or merge, show that another test still covers the behavior on purpose, or that it isn't worth testing; incidental coverage doesn't count. For a test that can't fail, name a plausible wrong implementation that would pass it.
 - List any out-of-focus findings at the end, as described under Focus.
